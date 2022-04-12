@@ -1,42 +1,33 @@
-import React, { Fragment } from "react";
-import { Table } from "react-bootstrap";
-
+// import React, from "react";
+import axios from "axios";
 export default function DisplaySongs({ songs }) {
   const columns = songs[0] && Object.keys(songs[0]);
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
     // do somehting here
+    deleteSong();
+    async function deleteSong() {
+      let response = await axios.delete(
+        "http://127.0.0.1:8000/api/songs/music/"
+      );
+    }
   };
 
   return (
-    <Fragment>
-      <Table cellPadding={5} cellSpacing={5}>
-        <thead>
-          <tr>{songs[0] && columns.map((heading) => <th>{heading}</th>)}</tr>
-        </thead>
-        <tbody>
+    <table cellPadding={5} cellSpacing={5}>
+      <thead>
+        <tr>{songs[0] && columns.map((heading) => <th>{heading}</th>)}</tr>
+      </thead>
+      <tbody>
+        {songs.map((row) => (
           <tr>
-            <td>1</td>
-            <td>2</td>
+            {columns.map((column) => (
+              <td>{row[column]}</td>
+            ))}
+            <button onClick={handleDelete()}>Delete</button>
           </tr>
-          <h1>Hello</h1>
-          {songs.map((song, index) => {
-            <tr key={index}>
-              <td>1</td>
-              <td> {song.title} </td>
-              <td> {song.artist} </td>
-            </tr>;
-            <button onClick={() => handleDelete(song.id)}> Delete </button>;
-            {
-              console.log("Record: ", song);
-            }
-          })}
-        </tbody>
-      </Table>
-    </Fragment>
-
-    // {columns.map((column) => (
-    //   <td>{song[column]}</td>
-    //   ))}{" "}
+        ))}
+      </tbody>
+    </table>
   );
 }
