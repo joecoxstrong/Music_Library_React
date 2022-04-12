@@ -2,67 +2,61 @@ import React, { useEffect, useState } from "react";
 import AddSong from "./Components/AddSong";
 import DisplaySongs from "./Components/DisplaySongs";
 import axios from "axios";
+import SearchBar from "./Components/SearchBar";
 
 function App() {
-  const [songs, setSongs] = useState([
-    {
-      title: "",
-      artist: "",
-      album: "",
-      release_date: "",
-      genre: "",
-      like: "",
-    },
-  ]);
+  const [songs, setSongs] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     getAllSongs();
+    async function getAllSongs() {
+      let response = await axios.get("http://127.0.0.1:8000/api/songs/music/");
+      setSongs(response.data);
+    }
   }, []);
+
+  function searchSongs(rows) {
+    const columns = rows[0] && Object.keys(rows[0]);
+    return rows.filter(
+      (row) =>
+        columns.some(
+          (column) =>
+            row[column].toString().toLowerCase().indexOf(search.toLowerCase()) >
+            -1
+        )
+      // row.title.toLowerCase().indexOf(search) > -1 ||
+      // row.artist.toLowerCase().indexOf(search) > -1 ||
+      // row.album.toLowerCase().indexOf(search) > -1 ||
+      // row.release_date.toLowerCase().indexOf(search) > -1 ||
+      // row.genre.toLowerCase().indexOf(search) > -1
+    );
+  }
+
   function addNewSong(song) {
     let tempSongs = [song, ...songs];
 
     setSongs(tempSongs);
   }
 
-  async function getAllSongs() {
-    let response = await axios.get("http://127.0.0.1:8000/api/songs/music/");
-    setSongs(response.data);
-  }
-
-  // const [songs, setSongs] = useState([
-
-  // ]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await fetch("http://127.0.0.1:8000/api/songs/music/");
-  //     const jsonResult = await result.json();
-
-  //     setSongs(jsonResult);
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  // const submitSong = async () => {
-
-  // }
   return (
     <div>
+      {/* <SearchBar /> */}
+      <div>
+        <input
+          type="text"
+          placeholder="Search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
       <AddSong addNewSongProperty={addNewSong} />
-      <DisplaySongs parentSongs={songs} />
-      {/* <div>
-        <h1>Music Library</h1>
-        {songs.map((songs) => (
-          <div key={songs.id}>
-            <h2>{songs.title}</h2>
-            <h3>{songs.artist}</h3>
-            <h3>{songs.album}</h3>
-            <h3>{songs.release_date}</h3>
-            <h3>{songs.genre}</h3>
-          </div>
-        ))}
-      </div> */}
+      <div>
+        {/* <DisplaySongs /> */}
+        <DisplaySongs songs={searchSongs(songs)} />
+      </div>
+
+      {/* <DisplaySongs parentSongs={songs} /> */}
     </div>
   );
 }

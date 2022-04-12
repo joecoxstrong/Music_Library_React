@@ -104,7 +104,7 @@ const AddSong = (props) => {
       <button
         type="submit"
         class="button rounded-button"
-        style={{ marginLeft: 485 }}
+        style={{ marginLeft: 121 }}
       >
         Create
       </button>

@@ -1,36 +1,41 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
-const DisplaySongs = (props) => {
+export default function DisplaySongs({ songs }) {
+  const columns = songs[0] && Object.keys(songs[0]);
+
   return (
-    <div>
-      <h1>Music Library</h1>
-      {props.parentSongs.map((songs) => (
-        <div key={songs.id}>
-          <h2>{songs.title}</h2>
-          <h3>{songs.artist}</h3>
-          <h3>{songs.album}</h3>
-          <h3>{songs.release_date}</h3>
-          <h3>{songs.genre}</h3>
-        </div>
-      ))}
-    </div>
-
-    // <div>
-    //   {props.parentEntries.map((entry) => {
-    //     return (
-    //       <div>
-    //         <h4 class="media-heading">{entry.name}</h4>
-    //         <div>{entry.title}</div>
-    //         <div>{entry.artist}</div>
-    //         <div>{entry.album}</div>
-    //         <div>{entry.release_date}</div>
-    //         <div>{entry.genre}</div>
-    //       </div>
-    //     );
-    //   })}
-    // </div>
+    <table cellPadding={0} cellSpacing={0}>
+      <thead>
+        <tr>{songs[0] && columns.map((heading) => <th>{heading}</th>)}</tr>
+      </thead>
+      <tbody>
+        {songs.map((row) => (
+          <tr>
+            {columns.map((column) => (
+              <td>{row[column]}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
-};
+}
 
-export default DisplaySongs;
+// const DisplaySongs = (props) => {
+//   return (
+//     <div>
+//       <h1>Music Library</h1>
+//       {props.parentSongs.map((songs) => (
+//         <div key={songs.id}>
+//           <h2>{songs.title}</h2>
+//           <h3>{songs.artist}</h3>
+//           <h3>{songs.album}</h3>
+//           <h3>{songs.release_date}</h3>
+//           <h3>{songs.genre}</h3>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default DisplaySongs;
