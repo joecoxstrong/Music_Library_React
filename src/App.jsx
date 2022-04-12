@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import AddSong from "./Components/AddSong";
 import DisplaySongs from "./Components/DisplaySongs";
 import axios from "axios";
-import SearchBar from "./Components/SearchBar";
+import NavBarTitle from "./Components/NavBar";
+import "./Components/App.css";
 
 function App() {
   const [songs, setSongs] = useState([]);
@@ -18,18 +19,12 @@ function App() {
 
   function searchSongs(rows) {
     const columns = rows[0] && Object.keys(rows[0]);
-    return rows.filter(
-      (row) =>
-        columns.some(
-          (column) =>
-            row[column].toString().toLowerCase().indexOf(search.toLowerCase()) >
-            -1
-        )
-      // row.title.toLowerCase().indexOf(search) > -1 ||
-      // row.artist.toLowerCase().indexOf(search) > -1 ||
-      // row.album.toLowerCase().indexOf(search) > -1 ||
-      // row.release_date.toLowerCase().indexOf(search) > -1 ||
-      // row.genre.toLowerCase().indexOf(search) > -1
+    return rows.filter((row) =>
+      columns.some(
+        (column) =>
+          row[column].toString().toLowerCase().indexOf(search.toLowerCase()) >
+          -1
+      )
     );
   }
 
@@ -41,8 +36,9 @@ function App() {
 
   return (
     <div>
-      {/* <SearchBar /> */}
-      <div>
+      <div className="navbar-background">
+        <NavBarTitle />
+
         <input
           type="text"
           placeholder="Search"
@@ -50,13 +46,12 @@ function App() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <AddSong addNewSongProperty={addNewSong} />
       <div>
-        {/* <DisplaySongs /> */}
+        <AddSong addNewSongProperty={addNewSong} />
+      </div>
+      <div className="music-image">
         <DisplaySongs songs={searchSongs(songs)} />
       </div>
-
-      {/* <DisplaySongs parentSongs={songs} /> */}
     </div>
   );
 }

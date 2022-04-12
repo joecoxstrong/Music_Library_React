@@ -1,0 +1,9 @@
+.navbar-background{
+    background-color: rgb(81, 81, 245);
+}
+
+.music-image{
+    
+        background-image: url('https://sonicscoop.com/wp-content/uploads/2019/05/music-library-neon.jpg');
+      height: 100vh
+}
