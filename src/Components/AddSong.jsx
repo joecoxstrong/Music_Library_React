@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 
 const AddSong = (props) => {
   const [title, setTitle] = useState("");
@@ -35,52 +35,44 @@ const AddSong = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <div class="row mb-3">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">
-          Song Title
-        </label>
         <div class="col-sm-10">
           <input
             type="title"
             class="form-control"
+            placeholder="Song Title"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
           />
         </div>
       </div>
       <div class="row mb-3">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">
-          Artist
-        </label>
         <div class="col-sm-10">
           <input
             type="artist"
             class="form-control"
+            placeholder="Artist"
             value={artist}
             onChange={(event) => setArtist(event.target.value)}
           />
         </div>
       </div>
       <div class="row mb-3">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">
-          Album
-        </label>
         <div class="col-sm-10">
           <input
             type="album"
             class="form-control"
+            placeholder="Album"
             value={album}
             onChange={(event) => setAlbum(event.target.value)}
           />
         </div>
       </div>
       <div class="row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">
-          Release Date
-        </label>
         <div class="col-sm-10">
           <input
             type="date"
             class="form-control"
+            placeholder="Release Date"
             value={release_date}
             onChange={(event) => setRelease_date(event.target.value)}
           />
@@ -88,13 +80,11 @@ const AddSong = (props) => {
       </div>
 
       <div class="row mb-3">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">
-          Genre
-        </label>
         <div class="col-sm-10">
           <input
             type="genre"
             class="form-control"
+            placeholder="Genre"
             value={genre}
             onChange={(event) => setGenre(event.target.value)}
           />

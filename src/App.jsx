@@ -46,10 +46,14 @@ function App() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <div>
-        <AddSong addNewSongProperty={addNewSong} />
-      </div>
       <div className="music-image">
+        <div className="col-md-4"></div>
+        <div className="col-md-4">
+          <AddSong addNewSongProperty={addNewSong} />
+        </div>
+        <div className="col-md-4"></div>
+      </div>
+      <div>
         <DisplaySongs songs={searchSongs(songs)} />
       </div>
     </div>

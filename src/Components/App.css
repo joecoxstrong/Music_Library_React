@@ -5,5 +5,9 @@
 .music-image{
     
         background-image: url('https://sonicscoop.com/wp-content/uploads/2019/05/music-library-neon.jpg');
-      height: 100vh
+      height: 40vh
+}
+
+.form-text-color{
+    text-emphasis-color: white;
 }
