@@ -44,14 +44,15 @@ function App() {
           placeholder="Search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          style={{ marginLeft: 1050 }}
         />
       </div>
       <div className="music-image">
-        <div className="col-md-4"></div>
-        <div className="col-md-4">
-          <AddSong addNewSongProperty={addNewSong} />
+        <div style={{ marginLeft: 500 }}>
+          <div className="col-md-6">
+            <AddSong addNewSongProperty={addNewSong} />
+          </div>
         </div>
-        <div className="col-md-4"></div>
       </div>
       <div>
         <DisplaySongs songs={searchSongs(songs)} />
