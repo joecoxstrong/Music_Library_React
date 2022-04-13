@@ -1,47 +1,38 @@
-// import React, from "react";
-import axios from "axios";
+import React from "react";
+
 export default function DisplaySongs({ songs }) {
   const columns = songs[0] && Object.keys(songs[0]);
 
-  const handleDelete = () => {
+  const handleDelete = async (songs) => {
     // do somehting here
-
-    // let songId = this.state.details.id;
-    axios.delete("http://127.0.0.1:8000/api/songs/music/" + "{songs.id}");
+    const response = await fetch(
+      `http://127.0.0.1:8000/api/songs/music/${songs.id}/`,
+      {
+        method: "DELETE",
+      }
+    );
+    const data = await response.json();
+    console.log(data);
   };
-  // function getSongId() {
-  //   let songId = this.props.match.parans.id;
-  //   axios
-  //     .get(`http://127.0.0.1:8000/api/songs/music/${songId}`)
-  //     .then((response) => {
-  //       this.setState({ details: response.data }, () => {
-  //         console.log(this.state);
-  //       });
-  //     });
-  // }
-
-  // function onDelete() {
-  //   let songId = this.state.details.id;
-  //   axios.delete(`http://127.0.0.1:8000/api/songs/music/${songId}`);
-  // }
 
   return (
-    <table cellPadding={5} cellSpacing={5}>
-      <thead>
-        <tr>{songs[0] && columns.map((heading) => <th>{heading}</th>)}</tr>
-      </thead>
-      <tbody>
-        {songs.map((row) => (
-          <tr>
-            {columns.map((column) => (
-              <td>{row[column]}</td>
-            ))}
-            <button type="submit">Delete</button>
-            <button>Update</button>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div key={songs.id}>
+      <table cellPadding={5} cellSpacing={5}>
+        <thead>
+          <tr>{songs[0] && columns.map((heading) => <th>{heading}</th>)}</tr>
+        </thead>
+        <tbody>
+          {songs.map((row) => (
+            <tr>
+              {columns.map((column) => (
+                <td>{row[column]}</td>
+              ))}
+              <button>UPDATE</button>
+              <button onClick={() => handleDelete(songs.id)}>DELETE</button>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
-  console.log(songs.id);
 }
