@@ -5,13 +5,25 @@ export default function DisplaySongs({ songs }) {
 
   const handleDelete = () => {
     // do somehting here
-    deleteSong();
-    async function deleteSong() {
-      let response = await axios.delete(
-        "http://127.0.0.1:8000/api/songs/music/"
-      );
-    }
+
+    // let songId = this.state.details.id;
+    axios.delete("http://127.0.0.1:8000/api/songs/music/" + "{songs.id}");
   };
+  // function getSongId() {
+  //   let songId = this.props.match.parans.id;
+  //   axios
+  //     .get(`http://127.0.0.1:8000/api/songs/music/${songId}`)
+  //     .then((response) => {
+  //       this.setState({ details: response.data }, () => {
+  //         console.log(this.state);
+  //       });
+  //     });
+  // }
+
+  // function onDelete() {
+  //   let songId = this.state.details.id;
+  //   axios.delete(`http://127.0.0.1:8000/api/songs/music/${songId}`);
+  // }
 
   return (
     <table cellPadding={5} cellSpacing={5}>
@@ -24,10 +36,12 @@ export default function DisplaySongs({ songs }) {
             {columns.map((column) => (
               <td>{row[column]}</td>
             ))}
-            <button onClick={handleDelete()}>Delete</button>
+            <button type="submit">Delete</button>
+            <button>Update</button>
           </tr>
         ))}
       </tbody>
     </table>
   );
+  console.log(songs.id);
 }

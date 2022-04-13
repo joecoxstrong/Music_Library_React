@@ -67,19 +67,18 @@ const AddSong = (props) => {
           />
         </div>
       </div>
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-sm-10">
           <input
             type="date"
             class="form-control"
-            placeholder="Release Date"
             value={release_date}
             onChange={(event) => setRelease_date(event.target.value)}
           />
         </div>
       </div>
 
-      <div class="row mb-3">
+      <div class="row mb-2">
         <div class="col-sm-10">
           <input
             type="genre"
@@ -91,11 +90,7 @@ const AddSong = (props) => {
         </div>
       </div>
 
-      <button
-        type="submit"
-        class="button rounded-button"
-        style={{ marginLeft: 258 }}
-      >
+      <button type="submit" style={{ marginLeft: 360 }}>
         Create
       </button>
     </form>
